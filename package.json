@@ -1,0 +1,50 @@
+{
+  "name": "@henningkerstan/jws-ed25519",
+  "version": "0.0.0",
+  "description": "A TypeScript implementation of JSON Web Signatures using the Ed25519 public-key signature system",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "npx jasmine-ts --config=jasmine.json",
+    "doc": "npx typedoc",
+    "build": "rimraf ./lib/ && npx tsc",
+    "all": "npm run build && npm run build && npm run doc",
+    "lint": "eslint --ignore-path .gitignore --fix src/**/*.ts",
+    "prepublishOnly": "npm run license-checker && npm run build",
+    "version": "node .version.js",
+    "prepare": "husky install",
+    "license-checker": "npx license-checker --summary --production --unknown --onlyAllow \"Apache-2.0;MIT;BSD;ISC\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/henningkerstan/jws-ed25519"
+  },
+  "keywords": [
+    "Ed25519",
+    "JWS"
+  ],
+  "author": "Henning Kerstan <mail@henningkerstan.de>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@henningkerstan/eslint-config": "^0.0.3",
+    "@henningkerstan/prettier-config": "^1.0.0",
+    "@types/jasmine": "^3.9.1",
+    "@types/node": "^16.9.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^3.9.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "license-checker": "^25.0.1",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typedoc": "^0.22.4",
+    "typescript": "^4.4.3"
+  },
+  "prettier": "@henningkerstan/prettier-config",
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "tweetnacl": "^1.0.3"
+  }
+}
