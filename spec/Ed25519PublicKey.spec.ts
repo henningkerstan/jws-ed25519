@@ -29,5 +29,9 @@ describe('An Ed25519PublicKey', () => {
     expect(publicKey.toString()).toBe(
       '{"crv":"Ed25519","kty":"OKP","x":"11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"}'
     )
+
+    expect(publicKey.jwkThumbprintSHA256).toBe(
+      'kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k'
+    )
   })
 })

@@ -15,14 +15,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** A JSON Web Signature (JWS) using the Ed25519 public-key signature system. */
 export class JWSEd25519 {
-  header: { alg: 'EdDSA' }
-  payload: string
-  signature: string
+  /** The protected header '{"alg":"EdDSA"}' in base64url encoding. */
+  readonly protectedHeader = 'eyJhbGciOiJFZERTQSJ9'
 
-  serializeCompact(): string {
-    return ''
+  /** The payload in base64url encoding. */
+  readonly payload: string
+
+  /** The signature in base64url encoding. */
+  readonly signature: string
+
+  /** The compact serialization (= dot-separated concatenation of base64url encoded protected header '{"alg":"EdDSA"}', the payload and the signature). */
+  readonly compactSerialization: string
+
+  /** The compact serialization (= dot-separated concatenation of base64url encoded protected header '{"alg":"EdDSA"}', the payload and the signature). */
+  toString() {
+    return this.compactSerialization
   }
 
-  constructor() {}
+  /** Create a new JSON Web Signature (JWS) object using the supplied  serialization. */
+  static fromCompactSerialization(jws: string) {
+    const parts = jws.split('.')
+
+    if (parts.length !== 3) {
+      throw new Error('Invalid serialization: not a JWS.')
+    }
+
+    if (parts[0] !== 'eyJhbGciOiJFZERTQSJ9') {
+      throw new Error('Invalid serialization: not an Ed25519 JWS.')
+    }
+  }
+
+  static fromPayloadAndSignature(payload: string, signature: string) {
+    return new JWSEd25519(payload, signature)
+  }
+
+  private constructor(payload: string, signature: string) {
+    this.payload = payload
+    this.signature = signature
+
+    // note that base64url('{"alg":"EdDSA"}') = eyJhbGciOiJFZERTQSJ9
+    this.compactSerialization =
+      'eyJhbGciOiJFZERTQSJ9.' + payload + '.' + this.signature
+  }
 }

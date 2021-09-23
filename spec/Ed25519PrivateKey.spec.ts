@@ -21,14 +21,18 @@ import { Ed25519PrivateKey } from '../src/Ed25519PrivateKey'
 
 describe('An Ed25519PrivateKey', () => {
   it('shall correctly represent the example from RFC8037', () => {
-    const PrivateKey = new Ed25519PrivateKey(
+    const key = new Ed25519PrivateKey(
       'nWGxne_9WmC6hEr0kuwsxERJxWl7MmkZcDusAxyuf2A'
     )
-    expect(PrivateKey.d).toBe('nWGxne_9WmC6hEr0kuwsxERJxWl7MmkZcDusAxyuf2A')
-    expect(PrivateKey.x).toBe('11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo')
+    expect(key.d).toBe('nWGxne_9WmC6hEr0kuwsxERJxWl7MmkZcDusAxyuf2A')
+    expect(key.x).toBe('11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo')
 
-    expect(PrivateKey.toString()).toBe(
+    expect(key.toString()).toBe(
       '{"crv":"Ed25519","d":"nWGxne_9WmC6hEr0kuwsxERJxWl7MmkZcDusAxyuf2A","kty":"OKP","x":"11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"}'
+    )
+
+    expect(key.jwkThumbprintSHA256).toBe(
+      'kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k'
     )
   })
 })
